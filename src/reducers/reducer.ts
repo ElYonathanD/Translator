@@ -16,7 +16,9 @@ export const reducer = (state: State, action: Action): State => {
       if (state.fromLanguage === 'auto') return state
       return {
         ...state,
-        loading: true,
+        loading: state.fromText !== '',
+        result: '',
+        fromText: state.result,
         fromLanguage: state.toLanguage,
         toLanguage: state.fromLanguage
       }
@@ -41,6 +43,7 @@ export const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         loading: action.payload !== '',
+        result: '',
         fromText: action.payload
       }
     case actionType.SET_RESULT:

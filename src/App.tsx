@@ -4,6 +4,7 @@ import LanguageSelector from './components/LanguageSelector'
 import TextArea from './components/TextArea'
 import useLanguageTranslation from './hooks/useLanguageTranslation'
 import { translate } from './services/translate'
+import { useDebounce } from './hooks/useDebounce'
 
 function App() {
   const {
@@ -15,12 +16,13 @@ function App() {
     setResult
   } = useLanguageTranslation()
 
+  const text = useDebounce(state.fromText)
   useEffect(() => {
-    if (state.fromText == '') return
+    if (text == '') return
     translate({
       fromLanguage: state.fromLanguage,
       toLanguage: state.toLanguage,
-      text: state.fromText
+      text
     })
       .then((result) => {
         if (result == null) return
@@ -29,7 +31,7 @@ function App() {
       .catch(() => {
         setResult('Error')
       })
-  }, [state.fromText, state.toLanguage, state.fromLanguage])
+  }, [text, state.toLanguage, state.fromLanguage])
   return (
     <div>
       <h1>Translate</h1>
