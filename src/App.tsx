@@ -1,7 +1,9 @@
+import { useEffect } from 'react'
 import './App.css'
 import LanguageSelector from './components/LanguageSelector'
 import TextArea from './components/TextArea'
 import useLanguageTranslation from './hooks/useLanguageTranslation'
+import { translate } from './services/translate'
 
 function App() {
   const {
@@ -12,6 +14,22 @@ function App() {
     setFromText,
     setResult
   } = useLanguageTranslation()
+
+  useEffect(() => {
+    if (state.fromText == '') return
+    translate({
+      fromLanguage: state.fromLanguage,
+      toLanguage: state.toLanguage,
+      text: state.fromText
+    })
+      .then((result) => {
+        if (result == null) return
+        setResult(result)
+      })
+      .catch(() => {
+        setResult('Error')
+      })
+  }, [state.fromText, state.toLanguage, state.fromLanguage])
   return (
     <div>
       <h1>Translate</h1>
