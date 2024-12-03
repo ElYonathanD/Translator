@@ -26,6 +26,7 @@ const TextArea = ({ type, loading, value, onChange }: Props) => {
       autoFocus={type === 'from'}
       placeholder={getPlaceHolder({ type, loading })}
       value={value}
+      disabled={type === 'to'}
       onChange={handleChange}
     ></textarea>
   )
