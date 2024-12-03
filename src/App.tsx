@@ -1,21 +1,28 @@
 import './App.css'
 import LanguageSelector from './components/LanguageSelector'
+import TextArea from './components/TextArea'
 import useLanguageTranslation from './hooks/useLanguageTranslation'
 
 function App() {
-  const { state, interchangeLanguages, setFromLanguage, setToLanguage } =
-    useLanguageTranslation()
+  const {
+    state,
+    interchangeLanguages,
+    setFromLanguage,
+    setToLanguage,
+    setFromText,
+    setResult
+  } = useLanguageTranslation()
   return (
     <div>
       <h1>Translate</h1>
       <div>
         <div>
-          <p>from {state.fromLanguage}</p>
           <LanguageSelector
             type='from'
             value={state.fromLanguage}
             onChange={setFromLanguage}
           />
+          <TextArea type='from' onChange={setFromText} value={state.fromText} />
         </div>
         <div>
           <button onClick={interchangeLanguages}>
@@ -33,12 +40,16 @@ function App() {
           </button>
         </div>
         <div>
-          <p>to {state.toLanguage}</p>
-
           <LanguageSelector
             type='to'
             value={state.toLanguage}
             onChange={setToLanguage}
+          />
+          <TextArea
+            type='to'
+            loading={state.loading}
+            onChange={setResult}
+            value={state.result}
           />
         </div>
       </div>
