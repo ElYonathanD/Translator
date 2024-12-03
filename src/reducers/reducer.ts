@@ -16,30 +16,38 @@ export const reducer = (state: State, action: Action): State => {
       if (state.fromLanguage === 'auto') return state
       return {
         ...state,
+        loading: true,
         fromLanguage: state.toLanguage,
         toLanguage: state.fromLanguage
       }
     case actionType.SET_FROM_LANGUAGE:
+      if (state.fromLanguage === action.payload) return state
       return {
         ...state,
+        loading: state.fromText !== '',
+        result: '',
         fromLanguage: action.payload
       }
     case actionType.SET_TO_LANGUAGE:
+      if (state.toLanguage === action.payload) return state
+
       return {
         ...state,
+        loading: state.fromText !== '',
+        result: '',
         toLanguage: action.payload
       }
     case actionType.SET_FROM_TEXT:
       return {
         ...state,
-        loading: true,
+        loading: action.payload !== '',
         fromText: action.payload
       }
     case actionType.SET_RESULT:
       return {
         ...state,
         loading: false,
-        fromText: action.payload
+        result: action.payload
       }
     default:
       return state
