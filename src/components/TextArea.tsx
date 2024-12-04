@@ -1,3 +1,4 @@
+import './textArea.css'
 interface Props {
   type: string
   loading?: boolean
@@ -21,13 +22,16 @@ const TextArea = ({ type, loading, value, onChange }: Props) => {
   }
   return (
     <textarea
-      name=''
-      id=''
       autoFocus={type === 'from'}
       placeholder={getPlaceHolder({ type, loading })}
       value={value}
       disabled={type === 'to'}
       onChange={handleChange}
+      style={
+        type === 'to'
+          ? { backgroundColor: '#bfbfbf', height: 'calc(100% - 30px)' }
+          : {}
+      }
     ></textarea>
   )
 }

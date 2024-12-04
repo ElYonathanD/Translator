@@ -1,6 +1,35 @@
 #root {
+  width: 100%;
   max-width: 1280px;
   margin: 0 auto;
   padding: 1rem;
   text-align: center;
+}
+
+.translate-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.translate-container .second-container {
+  width: 100%;
+}
+.translate-container .second-container .result-container {
+  background-color: #bfbfbf;
+  border-radius: 8px;
+  height: 200px;
+  position: relative;
+}
+.translate-container .second-container .action-buttons-container {
+  display: flex;
+  position: absolute;
+}
+
+@media (min-width: 768px) {
+  .translate-container {
+    flex-direction: row;
+  }
+  .translate-container .btn-interchange {
+    margin-top: 10px;
+  }
 }

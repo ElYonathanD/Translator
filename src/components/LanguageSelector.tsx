@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './languageSelector.css'
 import { SUPPORTED_LANGUAGES } from '../constants'
 import { FromLanguage, Language } from '../types/languages'
@@ -16,16 +16,30 @@ type Props =
     }
 const LanguageSelector = ({ type, value, onChange }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
+  const ref = useRef<HTMLDivElement>(null)
 
   const handleSelect = (language: string) => {
     onChange(language as Language)
     setIsOpen(false)
   }
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
+        setIsOpen(false)
+      }
+    }
+
+    window.addEventListener('click', handleClickOutside)
+    return () => {
+      window.removeEventListener('click', handleClickOutside)
+    }
+  }, [])
+
   return (
-    <div className='language-selector'>
+    <div className='language-selector' ref={ref}>
       <div className='selected-language' onClick={() => setIsOpen(!isOpen)}>
-        {value}
+        {SUPPORTED_LANGUAGES[value as Language] || 'auto'}
         <span className={`arrow ${isOpen ? 'open' : ''}`}>&#9662;</span>
       </div>
       {isOpen && (

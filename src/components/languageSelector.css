@@ -1,13 +1,11 @@
 .language-selector {
   position: relative;
-  width: 200px;
-  font-family: 'Arial', sans-serif;
   user-select: none;
 }
 
 .selected-language {
-  background-color: #1a232c;
-  color: #ffffff;
+  background-color: #315d89;
+  color: white;
   padding: 10px 15px;
   border-radius: 8px;
   cursor: pointer;
@@ -18,7 +16,7 @@
 }
 
 .selected-language:hover {
-  background-color: #2b3642;
+  background-color: #335271;
 }
 
 .arrow {
@@ -31,15 +29,18 @@
 
 .dropdown {
   position: absolute;
-  top: calc(100% + 5px);
+  top: calc(100% + 10px);
   left: 0;
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
   width: 100%;
+  z-index: 1;
+  background-color: white;
+  border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  max-height: 200px;
+  padding-inline: 10px;
+  overflow: scroll;
 }
 
 .dropdown-item {
@@ -51,12 +52,12 @@
 }
 
 .dropdown-item:hover {
-  background-color: #1a232c;
-  color: #ffffff;
+  background-color: #335271;
+  color: white;
 }
 
 .dropdown-item.active {
-  background-color: #1a232c;
-  color: #ffffff;
+  background-color: #335271;
+  color: white;
   font-weight: bold;
 }
