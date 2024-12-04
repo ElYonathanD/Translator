@@ -36,7 +36,7 @@ function App() {
 
   return (
     <>
-      <h1 style={{ marginBlock: '15px' }}>Translate</h1>
+      <h1 style={{ marginBlock: '15px' }}>Translator</h1>
       <div className='translate-container'>
         <div className='second-container'>
           <LanguageSelector
